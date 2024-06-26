@@ -1,0 +1,86 @@
+# API_URL = "https://app.leakbot.io"
+#API_LOGIN = "/v1.0/User/Account/MyLogin/"
+#API_DEVICE_LIST = "/v1.0/User/Device/MyDeviceList/"
+#API_ACCOUNT_MYREAD = "/v1.0/User/Account/MyRead/"
+#API_ADDRESS_MYREAD = "/v1.0/User/Address/MyRead/"
+#API_TENANT_MYVIEW = "/v1.0/User/Tenant/MyView/"
+#API_DEVICE_MYVIEW = "/v1.0/Device/Device/MyView/"
+#API_DEVICE_MYMSG = "/v1.0/Device/Device/MyListMessagesForDevice"
+#API_DEVICE_WATERUSAGE = "/v1.0/Device/Device/WaterUsage"
+
+
+
+###
+# @name = login
+POST https://app.leakbot.io/v1.0/User/Account/MyLogin/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "username": "{{$dotenv LEAKBOT_USERNAME}}",
+    "password": "{{$dotenv LEAKBOT_PASSWORD}}"
+}
+
+
+
+###
+# @name device_list
+POST https://app.leakbot.io/v1.0/User/Device/MyDeviceList/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  }
+
+###
+# @name = account_myread
+POST https://app.leakbot.io/v1.0/User/Account/MyRead/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  }
+
+
+###
+@name = address_myread
+POST https://app.leakbot.io/v1.0/User/Address/MyRead/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  }
+
+
+###
+@name = tenant_myview
+POST https://app.leakbot.io/v1.0/User/Tenant/MyView/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  }
+
+###
+# @name device_myview
+@deviceId = {{device_list.response.body.$..IDs[0].id}}
+POST https://app.leakbot.io/v1.0/Device/Device/MyView/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  "LbDevice_ID": "{{deviceId}}" }
+
+###
+# @name device_messages
+@deviceId = {{device_list.response.body.$..IDs[0].id}}
+POST https://app.leakbot.io/v1.0/Device/Device/MyListMessagesForDevice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  "LbDevice_ID": "{{deviceId}}", "fetch_size": 2 }
+
+
+###
+# @name device_water_usage
+@deviceId = {{device_list.response.body.$..IDs[0].id}}
+POST https://app.leakbot.io/v1.0/Device/Device/WaterUsage HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{  "LbDevice_ID": "{{deviceId}}", "timeZoneOffset": 60 }
