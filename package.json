@@ -4,6 +4,14 @@
   "description": "A thin wrapper to communicate with the Leakbot service over https",
   "author": "Jonas Andreasson",
   "license": "MIT",
+  "keywords": [
+    "Leakbot",
+    "API"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crusaider/leakbot-api"
+  },
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
   "types": "dist/index.d.ts",
@@ -16,7 +24,8 @@
     "build": "rollup -c",
     "lint": "eslint ./src ./tests",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm test && npm run build"
   },
   "lint-staged": {
     "*.ts": "eslint",
